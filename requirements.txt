@@ -1,0 +1,6 @@
+streamlit
+python-dotenv
+langchain
+datetime
+bs4
+langchain_openai

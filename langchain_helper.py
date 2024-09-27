@@ -1,20 +1,18 @@
 from datetime import datetime
-import os
+import streamlit as st
 from dotenv import load_dotenv
 from langchain_openai import OpenAI
 from langchain_core.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain_openai import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
 from scraper_functions import scrape_match_results, scrape_player_stats
-
 
 load_dotenv()
 
 today = datetime.today().date()
 
 llm = OpenAI()
-api_key = os.getenv("OPENAI_API_KEY")
+api_key = st.secrets["OPENAI_API_KEY"]
 
 embeddings = OpenAIEmbeddings()
 
