@@ -1,25 +1,22 @@
 from datetime import datetime
 import streamlit as st
-from dotenv import load_dotenv
 from langchain_openai import OpenAI
 from langchain_core.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain_openai import OpenAIEmbeddings
 from scraper_functions import scrape_match_results, scrape_player_stats
 
-load_dotenv()
-
 today = datetime.today().date()
 
-llm = OpenAI()
 api_key = st.secrets["OPENAI_API_KEY"]
+
+llm = OpenAI(model="gpt-3.5-turbo-instruct", temperature=0, max_tokens=100)
+
 
 embeddings = OpenAIEmbeddings()
 
 
 def get_response_from_query(query, docs):
-
-    llm = OpenAI(model="gpt-3.5-turbo-instruct", temperature=0, max_tokens=100)
 
     prompt = PromptTemplate(input_variables=["query", "docs", "today"], template="You are a helpful assistant that can answer questions about Liverpool FC's current 2024/25 season. Answer this question: {query} using the following information: {docs}. When someone says 'this season' they are talking about the 2024/25 season. Use today's date: {today} to establish when Liverpool's last match was. Don't make anything up. Only answer the information you are asked about. Keep your answers short and polite.")
 
