@@ -14,7 +14,6 @@ ChatLFC is a an AI application built using Streamlit and Langchain. It provides 
 - Streamlit
 - Langchain
 - OpenAI API
-- Beautiful Soup for web scraping (used in `scraper_functions.py`)
 
 ## Installation
 
