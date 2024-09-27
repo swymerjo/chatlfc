@@ -5,7 +5,6 @@ from langchain_openai import OpenAI
 from langchain_core.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain_openai import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
 from scraper_functions import scrape_match_results, scrape_player_stats
 
 
