@@ -32,7 +32,6 @@ def get_result_info():
             home_or_away = row.find('td', {'data-stat': 'venue'}).text.strip()
             opponent = row.find('td', {'data-stat': 'opponent'}).text.strip()
             opponent = remove_emoji_text(opponent)
-            print(opponent)
             
            
             try:
@@ -70,7 +69,7 @@ def remove_emoji_text(opponent_name):
     if text and text[0].islower():
         text.pop(0)
     
-    return ' '.join(text)    
+    return ' '.join(text)     
 
 def get_player_info():
     player_table = soup.find("table", {"id": "stats_standard_combined"})

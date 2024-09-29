@@ -2,8 +2,11 @@ from datetime import datetime
 import streamlit as st
 import langchain_helper as lch  
 import textwrap
-
 from scraper_functions import scrape_match_results
+
+def format_match_dates(date):
+    formatted_date = datetime.strptime(date, '%Y-%m-%d').strftime('%d %B %Y')
+    return formatted_date
 
 # Scrape match results
 match_results = scrape_match_results()
@@ -79,7 +82,8 @@ with st.container():
 
     # Display past match results
     for match in past_matches[:6]: 
-        st.markdown(f'<div class="match-result">{match["date"]} - vs {match["opponent"]}: {match["goals_for"]} - {match["goals_against"]}</div>', unsafe_allow_html=True)
+        date = format_match_dates(match['date'])
+        st.markdown(f'<div class="match-result">{date} - vs {match["opponent"]}: {match["goals_for"]} - {match["goals_against"]}</div>', unsafe_allow_html=True)
 
     # User query input
     query = st.text_input("Alright laa! Ask about recent Liverpool results or player stats:", max_chars=100)
