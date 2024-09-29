@@ -12,13 +12,22 @@ api_key = st.secrets["OPENAI_API_KEY"]
 
 llm = OpenAI(model="gpt-3.5-turbo-instruct", temperature=0, max_tokens=100)
 
-
 embeddings = OpenAIEmbeddings()
 
 
 def get_response_from_query(query, docs):
 
-    prompt = PromptTemplate(input_variables=["query", "docs", "today"], template="You are a helpful assistant that can answer questions about Liverpool FC's current 2024/25 season. Answer this question: {query} using the following information: {docs}. When someone says 'this season' they are talking about the 2024/25 season. Use today's date: {today} to establish when Liverpool's last match was. Don't make anything up. Only answer the information you are asked about. Keep your answers short and polite.")
+    prompt = PromptTemplate(
+    input_variables=["query", "docs", "today"], 
+    template="""
+    You are a helpful assistant that can answer questions about Liverpool FC's current 2024/25 season. 
+    Answer this question: {query} using the following information: {docs}. 
+    When someone says 'this season' they are talking about the 2024/25 season. 
+    Use today's date: {today} to establish when Liverpool's last match was. 
+    If the question is about 'the last game', 'the last match', or 'the last result', find the match closest to, 
+    but before today's date: {today}. Don't make anything up. Only answer the information you are asked about. 
+    Keep your answers short and polite.
+    """)
 
     chain = LLMChain(llm=llm, prompt=prompt)
 

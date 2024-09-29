@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from utils import remove_emojis 
 
 url = "https://fbref.com/en/squads/822bd0ba/all_comps/Liverpool-Stats-All-Competitions"
 response = requests.get(url)
@@ -30,6 +31,8 @@ def get_result_info():
             matchweek = row.find('td', {'data-stat': 'round'}).text.strip()
             home_or_away = row.find('td', {'data-stat': 'venue'}).text.strip()
             opponent = row.find('td', {'data-stat': 'opponent'}).text.strip()
+            opponent = remove_emoji_text(opponent)
+            print(opponent)
             
            
             try:
@@ -60,6 +63,14 @@ def get_result_info():
             })
     
     return results
+
+def remove_emoji_text(opponent_name):
+    text = opponent_name.split()
+    
+    if text and text[0].islower():
+        text.pop(0)
+    
+    return ' '.join(text)    
 
 def get_player_info():
     player_table = soup.find("table", {"id": "stats_standard_combined"})
