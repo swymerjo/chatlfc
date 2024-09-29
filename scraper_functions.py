@@ -6,6 +6,7 @@ url = "https://fbref.com/en/squads/822bd0ba/all_comps/Liverpool-Stats-All-Compet
 response = requests.get(url)
 soup = BeautifulSoup(response.content, "html.parser")
 
+@st.cache_data(ttl=3600) 
 def scrape_match_results():
     
     results = get_result_info()
