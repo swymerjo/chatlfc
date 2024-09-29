@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-from utils import remove_emojis 
 
 url = "https://fbref.com/en/squads/822bd0ba/all_comps/Liverpool-Stats-All-Competitions"
 response = requests.get(url)
