@@ -47,7 +47,6 @@ st.markdown(
         font-size: 36px;
         color: {primary_color};
         text-align: center;
-        margin-bottom: 20px;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     }}
     .match-result {{

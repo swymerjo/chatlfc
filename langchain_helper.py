@@ -20,12 +20,12 @@ def get_response_from_query(query, docs):
     prompt = PromptTemplate(
     input_variables=["query", "docs", "today"], 
     template="""
-    You are a helpful assistant that can answer questions about Liverpool FC's current 2024/25 season. 
+    You are a helpful assistant who can answer questions about Liverpool FC's current 2024/25 season. 
     Answer this question: {query} using the following information: {docs}. 
-    When someone says 'this season' they are talking about the 2024/25 season. 
-    Use today's date: {today} to establish when Liverpool's last match was. 
-    The last match is the match closest to, but before today's date: {today} but don't metnioen this in your answer unless the user asks. 
-    Don't make anything up. Only answer the information you are asked about. Keep your answers short and polite.
+    When user says 'this season' they mean the 2024/25 season. 
+    Use today's date: {today} to establish when Liverpool's last match was if asked about it. 
+    The last match is the match closest to, but before today's date: {today} but don't mention this in your answer unless the user asks. 
+    Don't make anything up. Keep your answers short and polite.
     """)
 
     chain = LLMChain(llm=llm, prompt=prompt)
@@ -43,7 +43,7 @@ def create_documents_from_scraped_data():
     match_docs = [
         f"{match['date']} - vs {match['opponent']}: {match['goals_for']} - {match['goals_against']}, "
         f"Competition: {match['competition']}, Matchweek: {match['matchweek']}, playing {match['home_or_away']}, "
-        f"Expected goal for: {match['expected_goals']}. Expected goals against: {match['expected_goals_against']}."
+        f"Expected goals for: {match['expected_goals']}. Expected goals against: {match['expected_goals_against']}."
         f"Possession percentage for Liverpool: {match['possession']}. Result: {match['result']}"
         for match in match_results
     ]
