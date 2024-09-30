@@ -24,9 +24,8 @@ def get_response_from_query(query, docs):
     Answer this question: {query} using the following information: {docs}. 
     When someone says 'this season' they are talking about the 2024/25 season. 
     Use today's date: {today} to establish when Liverpool's last match was. 
-    If the question is about 'the last game', 'the last match', or 'the last result', find the match closest to, 
-    but before today's date: {today}. Don't make anything up. Only answer the information you are asked about. 
-    Keep your answers short and polite.
+    The last match is the match closest to, but before today's date: {today} but don't metnioen this in your answer unless the user asks. 
+    Don't make anything up. Only answer the information you are asked about. Keep your answers short and polite.
     """)
 
     chain = LLMChain(llm=llm, prompt=prompt)
@@ -42,13 +41,17 @@ def create_documents_from_scraped_data():
     player_stats = scrape_player_stats()
 
     match_docs = [
-        f"{match['date']} - vs {match['opponent']}: {match['goals_for']} - {match['goals_against']}"
+        f"{match['date']} - vs {match['opponent']}: {match['goals_for']} - {match['goals_against']}, "
+        f"Competition: {match['competition']}, Matchweek: {match['matchweek']}, playing {match['home_or_away']}, "
+        f"Expected goal for: {match['expected_goals']}. Expected goals against: {match['expected_goals_against']}."
+        f"Possession percentage for Liverpool: {match['possession']}. Result: {match['result']}"
         for match in match_results
     ]
 
 
     player_docs = [
         f"Player: {player['player']}, Position: {player['position']}, "
+        f"Matches played: {player['matches_played']}, Matches started: {player["matches_started"]},"
         f"Age: {player['age']}, Minutes Played: {player['minutes']}, "
         f"Goals: {player['goals']}, Assists: {player['assists']}"
         for player in player_stats

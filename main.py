@@ -17,6 +17,7 @@ today = datetime.today().date()
 # Filter past matches
 past_matches = [match for match in match_results if datetime.strptime(match['date'], '%Y-%m-%d').date() <= today]
 past_matches = past_matches[::-1]
+upcoming_matches = [match for match in match_results if datetime.strptime(match['date'], '%Y-%m-%d').date() > today]
 
 # Set up Streamlit page configuration
 st.set_page_config(page_title="ChatLFC", page_icon="⚽", layout="centered")
@@ -57,16 +58,23 @@ st.markdown(
         box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
         color: black;
     }}
+    .upcoming-match {{
+        background-color: {primary_color};
+        color: {secondary_color};
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);     
+    }}
     .header {{
         color: {primary_color};
         text-align: center;
     }}
     .response {{
-        background-color: {primary_color};
-        color: {secondary_color};
+        background-color: {background_color};
+        color: black;
         padding: 10px;
         border-radius: 5px;
-        margin-top: 20px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }}
     </style>
@@ -81,9 +89,17 @@ with st.container():
     st.header("Recent Results:")
 
     # Display past match results
-    for match in past_matches[:6]: 
+    for match in past_matches[:3]: 
         date = format_match_dates(match['date'])
-        st.markdown(f'<div class="match-result">{date} - vs {match["opponent"]}: {match["goals_for"]} - {match["goals_against"]}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="match-result">{date} - {match["home_or_away"]} vs {match["opponent"]}: {match["goals_for"]} - {match["goals_against"]}  ({match["result"]})</div>', unsafe_allow_html=True)
+
+
+    st.header("Upcoming match:")
+
+     # Display upcoming match details
+    for match in upcoming_matches[:1]: 
+        date = format_match_dates(match['date'])
+        st.markdown(f'<div class="upcoming-match">{date} - {match["home_or_away"]} vs {match["opponent"]}</div>', unsafe_allow_html=True)
 
     # User query input
     query = st.text_input("Alright laa! Ask about recent Liverpool results or player stats:", max_chars=100)
@@ -97,4 +113,4 @@ with st.container():
         st.markdown(f'<div class="response">{textwrap.fill(response, width=80)}</div>', unsafe_allow_html=True)
 
 # Footer text
-st.markdown("<p style='text-align: center;'>Data provided by FBref.com and OpenAI's GPT-3.5-turbo-instruct model.</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; padding-top: 20px;'>Data provided by FBref.com and OpenAI's GPT-3.5-turbo-instruct model.</p>", unsafe_allow_html=True)
