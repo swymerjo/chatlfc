@@ -8,27 +8,21 @@ def format_match_dates(date):
     formatted_date = datetime.strptime(date, '%Y-%m-%d').strftime('%d %B %Y')
     return formatted_date
 
-# Scrape match results
 match_results = scrape_match_results()
 
-# Get today's date
 today = datetime.today().date()
 
-# Filter past matches
 past_matches = [match for match in match_results if datetime.strptime(match['date'], '%Y-%m-%d').date() <= today]
 past_matches = past_matches[::-1]
 upcoming_matches = [match for match in match_results if datetime.strptime(match['date'], '%Y-%m-%d').date() > today]
 
-# Set up Streamlit page configuration
 st.set_page_config(page_title="ChatLFC", page_icon="⚽", layout="centered")
 
-# Define LFC color palette
 primary_color = "#A50034"  # Liverpool Red
 secondary_color = "#FFFFFF"  # White
 background_color = "#F3F3F3"  # Light Gray
 card_color = "#FFDDC1"  # Soft Orange for card background
 
-# Custom CSS for styling
 st.markdown(
     f"""
     <style>
@@ -81,13 +75,10 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Container for the chatbot
 with st.container():
-    # Title and recent results header
     st.markdown('<h1 class="title">ChatLFC</h1>', unsafe_allow_html=True)
     st.header("Recent Results:")
 
-    # Display past match results
     for match in past_matches[:3]: 
         date = format_match_dates(match['date'])
         st.markdown(f'<div class="match-result">{date} - {match["home_or_away"]} vs {match["opponent"]}: {match["goals_for"]} - {match["goals_against"]}  ({match["result"]})</div>', unsafe_allow_html=True)
@@ -95,21 +86,18 @@ with st.container():
 
     st.header("Upcoming match:")
 
-     # Display upcoming match details
     for match in upcoming_matches[:1]: 
         date = format_match_dates(match['date'])
         st.markdown(f'<div class="upcoming-match">{date} - {match["home_or_away"]} vs {match["opponent"]}</div>', unsafe_allow_html=True)
 
-    # User query input
     query = st.text_input("Alright laa! Ask about recent Liverpool results or player stats:", max_chars=100)
+    docs = lch.create_documents_from_scraped_data()
 
-    # Handle query response
-    if query:
-        docs = lch.create_documents_from_scraped_data()
-        response, docs = lch.get_response_from_query(docs, query)
+    if query and docs:
+        db = lch.create_vector_db(docs)
+        response = lch.get_response_from_query_with_embeddings(db, query)
 
         st.subheader("Response:")
         st.markdown(f'<div class="response">{textwrap.fill(response, width=80)}</div>', unsafe_allow_html=True)
 
-# Footer text
 st.markdown("<p style='text-align: center; padding-top: 20px;'>Data provided by FBref.com and OpenAI's GPT-3.5-turbo-instruct model.</p>", unsafe_allow_html=True)

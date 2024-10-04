@@ -4,3 +4,5 @@ langchain
 datetime
 bs4
 langchain_openai
+langchain-community
+faiss-cpu
