@@ -16,7 +16,7 @@ past_matches = [match for match in match_results if datetime.strptime(match['dat
 past_matches = past_matches[::-1]
 upcoming_matches = [match for match in match_results if datetime.strptime(match['date'], '%Y-%m-%d').date() > today]
 
-st.set_page_config(page_title="ChatLFC", page_icon="⚽", layout="centered")
+st.set_page_config(page_title="StatLFC", page_icon="⚽", layout="centered")
 
 primary_color = "#A50034"  # Liverpool Red
 secondary_color = "#FFFFFF"  # White
@@ -38,7 +38,7 @@ st.markdown(
         background-color: {card_color};
     }}
     .title {{
-        font-size: 36px;
+        font-size: 50px;
         color: {primary_color};
         text-align: center;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
@@ -76,7 +76,7 @@ st.markdown(
 )
 
 with st.container():
-    st.markdown('<h1 class="title">ChatLFC</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="title">StatLFC</h1>', unsafe_allow_html=True)
     st.header("Recent Results:")
 
     for match in past_matches[:3]: 
