@@ -17,7 +17,15 @@ def create_documents_from_scraped_data():
         f"{match['date']} - vs {match['opponent']}: {match['goals_for']} - {match['goals_against']}, "
         f"Competition: {match['competition']}, Matchweek: {match['matchweek']}, playing {match['home_or_away']}, "
         f"Expected goals for: {match['expected_goals']}. Expected goals against: {match['expected_goals_against']}."
-        f"Possession percentage for Liverpool: {match['possession']}. Result: {match['result']}"
+        f"Possession percentage for Liverpool: {match['possession']}. Result: {match['result']}."
+        f"Goal scorers against Ipswich: Diogo Jota (60th minute) and Mohamed Salah (65th minute)."
+        f"Goal scorers against Brentford: Luis Diaz (13th minute) and Mohamed Salah (70th minute)."
+        f"Goal scorers against Manchester United: Luis Diaz (35th minute and 42nd minute) and Mohamed Salah (56th minute)."
+        f"Goal scorers against AC Milan: Ibrahima Konaté (23rd minute), Virgil Van Dijk (41st minute) and Dominik Szoboszlai (67th minute)."
+        f"Goal scorers against Bournemouth: Luis Diaz (26th minute and 28th minute) and Darwin Nunez (37th minute)."
+        f"Goal scorers against West Ham: Diogo Jota (25th minute and 29th minute), Mohamed Salah (74th minute), and Cody Gakpo (90th minute and 93rd minute)."
+        f"Goal scorers against Wolves: Ibrahima Konaté (45+2 minute) and Mohamed Salah (penalty goal in the 61st minute)."
+        f"Goal scorers against Bologna: Alexis Mac Allister (11th minute) and Mohamed Salah (75th minute)."
         for match in match_results
     ]
 
