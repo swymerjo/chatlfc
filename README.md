@@ -1,6 +1,6 @@
 # ChatLFC
 
-ChatLFC is a an AI application built using Streamlit and Langchain. It provides users with information about Liverpool FC's current 2024/25 season, including recent match results and player statistics.
+ChatLFC is an AI application built using Streamlit and Langchain. It provides users with information about Liverpool FC's current 2024/25 season, including recent match results and player statistics.
 
 ## Features
 
