@@ -1,6 +1,6 @@
 # ChatLFC
 
-ChatLFC is a an AI application built using Streamlit and Langchain. It provides users with information about Liverpool FC's current 2024/25 season, including recent match results and player statistics. 
+ChatLFC is a an AI application built using Streamlit and Langchain. It provides users with information about Liverpool FC's current 2024/25 season, including recent match results and player statistics.
 
 ## Features
 
@@ -25,31 +25,45 @@ To set up the project locally, follow these steps:
    git clone https://github.com/yourusername/chatlfc.git
    cd chatlfc
 
+   ```
+
 2. **Create a virtual environment:**
 
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+
+   ```
 
 3. **Install the required packages:**
-    ```bash
-    pip install -r requirements.txt
+
+   ```bash
+   pip install -r requirements.txt
+
+   ```
 
 4. **Add your OpenAI API key to the `secrets.toml` file:**
+
    ```bash
     OPENAI_API_KEY = "your_openai_api_key"
 
+   ```
+
 5. **Run the Streamlit app:**
    ```bash
-   streamlit run app.py
+   streamlit run main.py
+   ```
 
 ## Usage
+
 Once the app is running, open your browser and go to http://localhost:8501 to interact with ChatLFC. Type in your questions about Liverpool FC, and the assistant will respond with the relevant information.
 
 ## Contribution
+
 Contributions are welcome! If you'd like to contribute, please fork the repository and submit a pull request.
 
 ## License
+
 This project is licensed under the MIT License.
 
 ## Acknowledgments
@@ -58,7 +72,3 @@ This project is licensed under the MIT License.
 - [**Langchain**](https://langchain.readthedocs.io/en/latest/) for facilitating language model interactions.
 - [**OpenAI**](https://openai.com/api/) for providing the language model API.
 - [**FBref.com**](https://fbref.com/) for match and player data.
-
-
-
-

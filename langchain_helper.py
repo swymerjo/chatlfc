@@ -26,6 +26,13 @@ def create_documents_from_scraped_data():
         f"Goal scorers against West Ham: Diogo Jota (25th minute and 29th minute), Mohamed Salah (74th minute), and Cody Gakpo (90th minute and 93rd minute)."
         f"Goal scorers against Wolves: Ibrahima Konaté (45+2 minute) and Mohamed Salah (penalty goal in the 61st minute)."
         f"Goal scorers against Bologna: Alexis Mac Allister (11th minute) and Mohamed Salah (75th minute)."
+        f"Goal scorers against Crystal Palace: Diogo Jota (9th minute)."
+        f"Goal scorers against Chelsea: Mohamed Salah (29th minute) and Curtis Jones (51st minute)."
+        f"Goal scorers against Leipzig: Darwin Núñez (27th minute)."
+        f"Goal scorers against Arsenal: Virgil van Dijk (18th minute) and Mohamed Salah (81st minute)."
+        f"Goal scorers against Brighton (Carabao Cup): Codky Gakpo (46th and 63rd minute) and Luis Diaz (85th minute)."
+        f"Goal scorers against Brighton (Premier League): Cody Gakpo (69th minute) and Mohamed Salah (72nd minute)."
+        f"Goal scorers against Bayer Leverkusen: Luis Diaz (61st, 63rd, and 92nd minute) and Cody Gakpo (63rd minute)."
         for match in match_results
     ]
 
