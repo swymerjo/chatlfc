@@ -126,6 +126,21 @@ def get_player_info():
             except (ValueError, AttributeError):
                 penalities_scored = None
 
+            try:
+                expected_goals = int(row.find('td', {'data-stat': 'xg'}).text.strip())  
+            except (ValueError, AttributeError):
+                expected_goals = None
+
+            try:
+                progressive_passes = int(row.find('td', {'data-stat': 'progressive_passes'}).text.strip())  
+            except (ValueError, AttributeError):
+                progressive_passes = None
+
+            try:
+                progressive_carries = int(row.find('td', {'data-stat': 'progessive_carries'}).text.strip())  
+            except (ValueError, AttributeError):
+                progressive_carries = None
+
             players.append({
                 "player": player,
                 "position": position,
@@ -135,7 +150,10 @@ def get_player_info():
                 "minutes": minutes,
                 "goals": goals,
                 "assists": assists,
-                "penalities_scored": penalities_scored
+                "penalities_scored": penalities_scored,
+                "expected_goals": expected_goals,
+                "progessive_passes": progressive_passes,
+                "progressive_carries": progressive_carries
             })
        
     return players        
