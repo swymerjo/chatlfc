@@ -46,6 +46,7 @@ def create_documents_from_scraped_data():
         f"Goal scorers against Brighton (Carabao Cup): Codky Gakpo (46th and 63rd minute) and Luis Diaz (85th minute)."
         f"Goal scorers against Brighton (Premier League): Cody Gakpo (69th minute) and Mohamed Salah (72nd minute)."
         f"Goal scorers against Bayer Leverkusen: Luis Diaz (61st, 63rd, and 92nd minute) and Cody Gakpo (63rd minute)."
+        f"Goal scorers against Aston Villa: Darwin Núñez (20th minute) and Mohamed Salah (84th minute)."
     ]
 
     docs = match_docs + player_docs + match_scorers
