@@ -26,10 +26,11 @@ def create_documents_from_scraped_data():
         f"Player: {player['player']}, Position: {player['position']}, "
         f"Matches played: {player['matches_played']}, Matches started: {player["matches_started"]},"
         f"Age: {player['age']}, Minutes Played: {player['minutes']}, "
-        f"Goals: {player['goals']}, Expected goals: {player['xg']}, Assists: {player['assists']}"
+        f"Goals: {player['goals']}, Assists: {player['assists']}"
         f"Progessive passes: {player['progressive_passes']}, Progressive carries: {player['progressive_carries']}, "
         for player in player_stats
     ]
+
 
     match_scorers = [
         f"Goal scorers against Ipswich: Diogo Jota (60th minute) and Mohamed Salah (65th minute)."
