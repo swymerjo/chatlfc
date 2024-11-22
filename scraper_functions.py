@@ -13,6 +13,10 @@ def scrape_player_stats():
      player_info = get_player_info()
      return player_info
 
+def scrape_goalkeeper_stats():
+    goalkeeper_info = get_goalkeeper_info()
+    return goalkeeper_info
+
 def get_result_info():
     matches_table = soup.find("table", {"id": "matchlogs_for"})
 
@@ -118,7 +122,37 @@ def get_player_info():
                 "expected_assists": expected_assists,
                 "penalities_scored": penalities_scored,
                 "progressive_passes": progressive_passes,
-                "progressive_carries": progressive_carries
+                "progressive_carries": progressive_carries,
+
             })
-       
-    return players        
+
+    
+    return players      
+
+def get_goalkeeper_info():
+     goalkeeping_table = soup.find("table", {"id": "stats_keeper_combined"})
+
+     goalkeepers = []
+
+
+     for row in goalkeeping_table.find("tbody").find_all("tr"):
+        cols = row.find_all("td")
+
+        if len(cols) > 0:
+            
+            goalkeeper = row.find('th', {'data-stat': 'player'}).text.strip()
+            goals_against = row.find('td', {'data-stat': 'gk_goals_against'}).text.strip()
+            saves = row.find('td', {'data-stat': 'gk_saves'}).text.strip()
+            save_percentage = row.find('td', {'data-stat': 'gk_save_pct'}).text.strip()
+            clean_sheets = row.find('td', {'data-stat': 'gk_clean_sheets'}).text.strip()
+
+            goalkeepers.append({
+                "goalkeeper": goalkeeper,
+                "goals_against": goals_against,
+                "saves": saves,
+                "save_percentage": save_percentage,
+                "clean_sheets": clean_sheets
+        })
+
+
+     return goalkeepers

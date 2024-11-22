@@ -5,13 +5,14 @@ from langchain_openai import OpenAI
 from langchain_core.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain_openai import OpenAIEmbeddings
-from scraper_functions import scrape_match_results, scrape_player_stats
+from scraper_functions import scrape_goalkeeper_stats, scrape_match_results, scrape_player_stats
 from langchain.docstore.document import Document
 from langchain_community.vectorstores import FAISS
 
 def create_documents_from_scraped_data():
     match_results = scrape_match_results()
     player_stats = scrape_player_stats()
+    goalkeeper_stats = scrape_goalkeeper_stats()
 
     match_docs = [
         f"{match['date']} - vs {match['opponent']}: {match['goals_for']} - {match['goals_against']}, "
@@ -31,6 +32,13 @@ def create_documents_from_scraped_data():
         f"Expected goals: {player['expected_goals']}, Expected assists: {player['expected_assists']}, "
         f"Progressive passes: {player['progressive_passes']}, Progressive carries: {player['progressive_carries']}, "
         for player in player_stats
+    ]
+
+    goalkeeper_docs = [
+    f"Goalkeeper: {goalkeeper['goalkeeper']},"
+    f"Goals conceded / goals against: {goalkeeper['goals_against']}, Saves made: {goalkeeper['saves']}."
+    f"Save percentage: {goalkeeper['save_percentage']}. Clean sheets: {goalkeeper['clean_sheets']}."
+    for goalkeeper in goalkeeper_stats
     ]
 
 
@@ -53,7 +61,7 @@ def create_documents_from_scraped_data():
         f"Goal scorers against Aston Villa: Darwin Núñez (20th minute) and Mohamed Salah (84th minute)."
     ]
 
-    docs = match_docs + player_docs + match_scorers
+    docs = match_docs + player_docs + goalkeeper_docs + match_scorers
     return docs
 
 def create_vector_db(docs: str)-> FAISS:

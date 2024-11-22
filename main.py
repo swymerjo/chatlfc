@@ -73,7 +73,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Create three columns: left (spacer), middle (content), right (spacer)
 left_col, middle_col, right_col = st.columns([1, 2, 1])
 
 with right_col:
@@ -94,6 +93,10 @@ StatLFC can tell you about:
     <li>Penalties scored</li>
     <li>Matches played</li>
     <li>Matches started</li>
+    <li>Goalkeepers: Clean sheets</li>
+    <li>Goalkeepers: Save percentage</li>
+    <li>Goalkeepers: Saves made</li>
+    <li>Goalkeepers: Goals conceded</li>
 </ul>
 </p>
 """, unsafe_allow_html=True)
