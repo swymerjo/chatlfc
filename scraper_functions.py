@@ -94,47 +94,15 @@ def get_player_info():
             player = row.find('th', {'data-stat': 'player'}).text.strip()
             position = row.find('td', {'data-stat': 'position'}).text.strip()
             age = row.find('td', {'data-stat': 'age'}).text.strip()
+            minutes = row.find('td', {'data-stat': 'minutes'}).text.strip()
+            goals = row.find('td', {'data-stat': 'goals'}).text.strip()
+            assists = row.find('td', {'data-stat': 'assists'}).text.strip()
+            matches_played = row.find('td', {'data-stat': 'games'}).text.strip()
+            matches_started = row.find('td', {'data-stat': 'games_starts'}).text.strip()
+            penalities_scored = row.find('td', {'data-stat': 'pens_made'}).text.strip()
+            progressive_passes = row.find('td', {'data-stat': 'progressive_passes'}).text.strip()
+            progressive_carries = row.find('td', {'data-stat': 'progressive_carries'}).text.strip()
 
-            try:
-                minutes = int(row.find('td', {'data-stat': 'minutes'}).text.strip())  
-            except (ValueError, AttributeError):
-                minutes = None  
-
-
-            try:
-                goals = int(row.find('td', {'data-stat': 'goals'}).text.strip())  
-            except (ValueError, AttributeError):
-                goals = None  
-
-            try:
-                assists = int(row.find('td', {'data-stat': 'assists'}).text.strip())  
-            except (ValueError, AttributeError):
-                assists = None  
-            
-            try:
-                matches_played = int(row.find('td', {'data-stat': 'games'}).text.strip())  
-            except (ValueError, AttributeError):
-                matches_played = None 
-
-            try:
-                matches_started = int(row.find('td', {'data-stat': 'games_starts'}).text.strip())  
-            except (ValueError, AttributeError):
-                matches_started = None 
-
-            try:
-                penalities_scored = int(row.find('td', {'data-stat': 'pens_made'}).text.strip())  
-            except (ValueError, AttributeError):
-                penalities_scored = None
-
-            try:
-                progressive_passes = int(row.find('td', {'data-stat': 'progressive_passes'}).text.strip())  
-            except (ValueError, AttributeError):
-                progressive_passes = None
-
-            try:
-                progressive_carries = int(row.find('td', {'data-stat': 'progressive_carries'}).text.strip())  
-            except (ValueError, AttributeError):
-                progressive_carries = None
 
             players.append({
                 "player": player,

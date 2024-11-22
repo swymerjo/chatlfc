@@ -79,7 +79,7 @@ def get_response_from_query_with_embeddings(db, query, k=4):
         Keep your answers as short as possible and be polite.
         If you don't know the answer, apologise and ask the user to ask another question. 
         When the user says 'this season' they mean the 2024/25 season. 
-        When asked about Liverpool's last match, last game, or last result, this is the match closest to, but before today's date: {today}
+        When asked about Liverpool's last match, last game, or last result, this is the match closest to, but before today's date: {today}.
         When asked about Liverpool's next match or next game, say you don't know.
         """
     )
