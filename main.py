@@ -16,7 +16,7 @@ past_matches = [match for match in match_results if datetime.strptime(match['dat
 past_matches = past_matches[::-1]
 upcoming_matches = [match for match in match_results if datetime.strptime(match['date'], '%Y-%m-%d').date() > today]
 
-st.set_page_config(page_title="StatLFC", page_icon="⚽", layout="centered")
+st.set_page_config(page_title="StatLFC", page_icon="⚽", layout="wide")
 
 primary_color = "#A50034"  # Liverpool Red
 secondary_color = "#FFFFFF"  # White
@@ -30,8 +30,6 @@ st.markdown(
         background-color: {background_color};
     }}
     .container {{
-        max-width: 600px;
-        margin: 0 auto;
         padding: 20px;
         border-radius: 15px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -75,29 +73,55 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-with st.container():
-    st.markdown('<h1 class="title">StatLFC</h1>', unsafe_allow_html=True)
-    st.header("Recent Results:")
+# Create three columns: left (spacer), middle (content), right (spacer)
+left_col, middle_col, right_col = st.columns([1, 2, 1])
 
-    for match in past_matches[:3]: 
-        date = format_match_dates(match['date'])
-        st.markdown(f'<div class="match-result">{date} - {match["home_or_away"]} vs {match["opponent"]}: {match["goals_for"]} - {match["goals_against"]}  ({match["result"]})</div>', unsafe_allow_html=True)
+with right_col:
+   st.markdown("""
+<div style='margin-top: 120px;'></div>
+<p style='font-size: 16px; margin-left: 50px;'>
+StatLFC can tell you about:
+<ul style='margin-left: 50px;'>
+    <li>Match results</li>
+    <li>Goals scored</li>
+    <li>Expected goals</li>
+    <li>Assists</li>
+    <li>Expected assists</li>
+    <li>Possession</li>
+    <li>Progressive passes</li>
+    <li>Progressive carries</li>
+    <li>Minutes played</li>
+    <li>Penalties scored</li>
+    <li>Matches played</li>
+    <li>Matches started</li>
+</ul>
+</p>
+""", unsafe_allow_html=True)
 
 
-    st.header("Upcoming match:")
+with middle_col:
+    with st.container():
+        st.markdown('<h1 class="title">StatLFC</h1>', unsafe_allow_html=True)
+        st.header("Recent Results:")
 
-    for match in upcoming_matches[:1]: 
-        date = format_match_dates(match['date'])
-        st.markdown(f'<div class="upcoming-match">{date} - {match["home_or_away"]} vs {match["opponent"]}</div>', unsafe_allow_html=True)
+        for match in past_matches[:3]: 
+            date = format_match_dates(match['date'])
+            st.markdown(f'<div class="match-result">{date} - {match["home_or_away"]} vs {match["opponent"]}: {match["goals_for"]} - {match["goals_against"]}  ({match["result"]})</div>', unsafe_allow_html=True)
 
-    query = st.text_input("Alright laa! Ask about recent Liverpool results or player stats:", max_chars=100)
-    docs = lch.create_documents_from_scraped_data()
+        st.header("Upcoming match:")
 
-    if query and docs:
-        db = lch.create_vector_db(docs)
-        response = lch.get_response_from_query_with_embeddings(db, query)
+        for match in upcoming_matches[:1]: 
+            date = format_match_dates(match['date'])
+            st.markdown(f'<div class="upcoming-match">{date} - {match["home_or_away"]} vs {match["opponent"]}</div>', unsafe_allow_html=True)
 
-        st.subheader("Response:")
-        st.markdown(f'<div class="response">{textwrap.fill(response, width=80)}</div>', unsafe_allow_html=True)
+        query = st.text_input("Alright laa! Ask about recent Liverpool results or player stats:", max_chars=100)
+        docs = lch.create_documents_from_scraped_data()
+
+        if query and docs:
+            db = lch.create_vector_db(docs)
+            response = lch.get_response_from_query_with_embeddings(db, query)
+
+            st.subheader("Response:")
+            st.markdown(f'<div class="response">{textwrap.fill(response, width=80)}</div>', unsafe_allow_html=True)
 
 st.markdown("<p style='text-align: center; padding-top: 20px;'>Data provided by FBref.com and OpenAI's GPT-3.5-turbo-instruct model.</p>", unsafe_allow_html=True)
