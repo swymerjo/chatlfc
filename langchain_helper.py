@@ -52,7 +52,6 @@ def create_documents_from_scraped_data():
     ]
 
     docs = match_docs + player_docs + match_scorers
-
     return docs
 
 def create_vector_db(docs: str)-> FAISS:
@@ -74,12 +73,14 @@ def get_response_from_query_with_embeddings(db, query, k=4):
     prompt = PromptTemplate(
         input_variables=["query", "docs", "today"], 
         template="""
-        You are a helpful assistant who can answer questions about Liverpool FC's current 2024/25 season. 
-        Answer this question: {query} using the following information: {docs}. 
-        When user says 'this season' they mean the 2024/25 season. 
-        Use today's date: {today} to establish when Liverpool's last match was if asked about it. 
-        The last match is the match closest to, but before today's date: {today} but don't mention this in your answer unless the user asks. 
-        Don't make anything up. Keep your answers short and polite.
+        You are a helpful assistant who can answer questions about Liverpool FC's current 2024/25 season.
+        Answer the user's question: {query} using this information: {docs}. 
+        Don't make anything up and only answer the question you are asked. Don't provide additional information.
+        Keep your answers as short as possible and be polite.
+        If you don't know the answer, apologise and ask the user to ask another question. 
+        When the user says 'this season' they mean the 2024/25 season. 
+        When asked about Liverpool's last match, last game, or last result, this is the match closest to, but before today's date: {today}
+        When asked about Liverpool's next match or next game, say you don't know.
         """
     )
 
@@ -89,3 +90,4 @@ def get_response_from_query_with_embeddings(db, query, k=4):
     response = response.replace("\n", "")
 
     return response
+
