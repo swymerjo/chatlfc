@@ -24,10 +24,12 @@ def create_documents_from_scraped_data():
 
     player_docs = [
         f"Player: {player['player']}, Position: {player['position']}, "
-        f"Matches played: {player['matches_played']}, Matches started: {player["matches_started"]},"
+        f"Matches played: {player['matches_played']}, Matches started: {player["matches_started"]}, "
         f"Age: {player['age']}, Minutes Played: {player['minutes']}, "
-        f"Goals: {player['goals']}, Assists: {player['assists']}"
-        f"Progessive passes: {player['progressive_passes']}, Progressive carries: {player['progressive_carries']}, "
+        f"Goals: {player['goals']}, Assists: {player['assists']}, "
+        f"Penalties scored: {player['penalities_scored']}, "
+        f"Expected goals: {player['expected_goals']}, Expected assists: {player['expected_assists']}, "
+        f"Progressive passes: {player['progressive_passes']}, Progressive carries: {player['progressive_carries']}, "
         for player in player_stats
     ]
 

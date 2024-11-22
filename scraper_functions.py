@@ -96,13 +96,14 @@ def get_player_info():
             age = row.find('td', {'data-stat': 'age'}).text.strip()
             minutes = row.find('td', {'data-stat': 'minutes'}).text.strip()
             goals = row.find('td', {'data-stat': 'goals'}).text.strip()
+            expected_goals = row.find('td', {'data-stat': 'xg'}).text.strip()
             assists = row.find('td', {'data-stat': 'assists'}).text.strip()
+            expected_assists = row.find('td', {'data-stat': 'xg_assist'}).text.strip()
             matches_played = row.find('td', {'data-stat': 'games'}).text.strip()
             matches_started = row.find('td', {'data-stat': 'games_starts'}).text.strip()
             penalities_scored = row.find('td', {'data-stat': 'pens_made'}).text.strip()
             progressive_passes = row.find('td', {'data-stat': 'progressive_passes'}).text.strip()
             progressive_carries = row.find('td', {'data-stat': 'progressive_carries'}).text.strip()
-
 
             players.append({
                 "player": player,
@@ -113,6 +114,8 @@ def get_player_info():
                 "minutes": minutes,
                 "goals": goals,
                 "assists": assists,
+                "expected_goals": expected_goals,
+                "expected_assists": expected_assists,
                 "penalities_scored": penalities_scored,
                 "progressive_passes": progressive_passes,
                 "progressive_carries": progressive_carries
