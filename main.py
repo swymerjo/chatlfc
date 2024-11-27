@@ -2,13 +2,13 @@ from datetime import datetime
 import streamlit as st
 import langchain_helper as lch  
 import textwrap
-from scraper_functions import scrape_match_results
+from scraper_functions import get_result_info
 
 def format_match_dates(date):
     formatted_date = datetime.strptime(date, '%Y-%m-%d').strftime('%d %B %Y')
     return formatted_date
 
-match_results = scrape_match_results()
+match_results = get_result_info()
 
 today = datetime.today().date()
 

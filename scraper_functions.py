@@ -5,18 +5,6 @@ url = "https://fbref.com/en/squads/822bd0ba/all_comps/Liverpool-Stats-All-Compet
 response = requests.get(url)
 soup = BeautifulSoup(response.content, "html.parser")
 
-def scrape_match_results():
-    results = get_result_info()
-    return results
-
-def scrape_player_stats():
-     player_info = get_player_info()
-     return player_info
-
-def scrape_goalkeeper_stats():
-    goalkeeper_info = get_goalkeeper_info()
-    return goalkeeper_info
-
 def get_result_info():
     matches_table = soup.find("table", {"id": "matchlogs_for"})
 
@@ -130,6 +118,7 @@ def get_player_info():
     return players      
 
 def get_goalkeeper_info():
+     
      goalkeeping_table = soup.find("table", {"id": "stats_keeper_combined"})
 
      goalkeepers = []

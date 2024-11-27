@@ -5,14 +5,14 @@ from langchain_openai import OpenAI
 from langchain_core.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain_openai import OpenAIEmbeddings
-from scraper_functions import scrape_goalkeeper_stats, scrape_match_results, scrape_player_stats
+from scraper_functions import get_result_info, get_player_info, get_goalkeeper_info
 from langchain.docstore.document import Document
 from langchain_community.vectorstores import FAISS
 
 def create_documents_from_scraped_data():
-    match_results = scrape_match_results()
-    player_stats = scrape_player_stats()
-    goalkeeper_stats = scrape_goalkeeper_stats()
+    match_results = get_result_info()
+    player_stats = get_player_info()
+    goalkeeper_stats = get_goalkeeper_info()
 
     match_docs = [
         f"{match['date']} - vs {match['opponent']}: {match['goals_for']} - {match['goals_against']}, "
