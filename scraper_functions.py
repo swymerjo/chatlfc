@@ -16,6 +16,7 @@ def get_result_info():
         if len(cols) > 0:
         
             date = row.find('th', {'data-stat': 'date'}).text.strip()
+            start_time = row.find('td', {'data-stat': 'start_time'}).text.strip()
             competition = row.find('td', {'data-stat': 'comp'}).text.strip()
             matchweek = row.find('td', {'data-stat': 'round'}).text.strip()
             home_or_away = row.find('td', {'data-stat': 'venue'}).text.strip()
@@ -51,6 +52,7 @@ def get_result_info():
     
             results.append({
                 "date": date,
+                "start_time": start_time,
                 "competition": competition,
                 "matchweek": matchweek,
                 "home_or_away": home_or_away,
@@ -62,7 +64,6 @@ def get_result_info():
                 "possession": possession,
                 "result": result
             })
-    
     return results
 
 def remove_emoji_text(opponent_name):

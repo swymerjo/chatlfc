@@ -10,11 +10,15 @@ def format_match_dates(date):
 
 match_results = get_result_info()
 
-today = datetime.today().date()
+now = datetime.now()
+today = now.date()
 
-past_matches = [match for match in match_results if datetime.strptime(match['date'], '%Y-%m-%d').date() <= today]
+past_matches = [
+    match for match in match_results
+    if datetime.strptime(f"{match['date']} {match['start_time']}", '%Y-%m-%d %H:%M') <= now
+]
 past_matches = past_matches[::-1]
-upcoming_matches = [match for match in match_results if datetime.strptime(match['date'], '%Y-%m-%d').date() > today]
+upcoming_matches = [match for match in match_results if datetime.strptime(f"{match['date']} {match['start_time']}", '%Y-%m-%d %H:%M') > now]
 
 st.set_page_config(page_title="StatLFC", page_icon="⚽", layout="wide")
 
@@ -109,7 +113,7 @@ with middle_col:
 
         for match in past_matches[:3]: 
             date = format_match_dates(match['date'])
-            st.markdown(f'<div class="match-result">{date} - {match["home_or_away"]} vs {match["opponent"]}: {match["goals_for"]} - {match["goals_against"]}  ({match["result"]})</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="match-result">{date} - {match["home_or_away"]} vs {match["opponent"]}: {match["goals_for"]} - {match["goals_against"]} ({match["result"]})</div>', unsafe_allow_html=True)
 
         st.header("Upcoming match:")
 
